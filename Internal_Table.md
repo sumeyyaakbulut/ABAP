@@ -1,3 +1,2 @@
-
 #Internal Tabloların Oluşturulması
 **abap**
