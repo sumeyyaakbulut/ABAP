@@ -39,6 +39,8 @@ Yukarıdaki kodun çıktısı aşağıda gösterilmiştir. lt_table1, TYPE TABLE
 ![image](https://github.com/sumeyyaakbulut/ABAP/assets/62395974/38fe7cc5-1e04-42a1-8a08-1140d0936b7f)
 
 
+
+
 ```cadence
 DATA it3 TYPE HASHED TABLE OF zdemo_abap_fli WITH UNIQUE DEFAULT KEY.
 
