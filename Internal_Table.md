@@ -13,23 +13,19 @@ TYPE STANDARD TABLE OF kullanıldığında, bir iç tablo türü oluşturulur ve
 ```cadence
 DATA: lt_table1 TYPE TABLE OF i,
       lt_table2 TYPE STANDARD TABLE OF i,
-      lv_value   TYPE i.
-
-
-" Verileri ekleyelim
-lv_value = 2.
-APPEND lv_value TO lt_table1.
-APPEND lv_value TO lt_table2.
+      lv_value  TYPE i.
 
 lv_value = 2.
 APPEND lv_value TO lt_table1.
 APPEND lv_value TO lt_table2.
 
-" lt_table1'i yazdıralım (TYPE TABLE OF)
+lv_value = 1.
+APPEND lv_value TO lt_table1.
+APPEND lv_value TO lt_table2.
+
 WRITE: 'lt_table1 (TYPE TABLE OF):',
        / lt_table1.
 
-" lt_table2'yi yazdıralım (TYPE STANDARD TABLE OF)
 WRITE: 'lt_table2 (TYPE STANDARD TABLE OF):',
        / lt_table2.
 ```
