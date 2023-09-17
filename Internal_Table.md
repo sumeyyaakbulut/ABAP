@@ -32,7 +32,9 @@ WRITE: 'lt_table2 (TYPE STANDARD TABLE OF):',
        / lt_table2.
 ```
 
+
 Yukarıdaki kodun çıktısı aşağıda gösterilmiştir. lt_table1, TYPE TABLE OF ile tanımlandığı için doğrudan sıralanmaz ve sıralamak için bir SORT komutu kullanılması gerekir. Bu nedenle, lt_table1 iç tablosu eklenen sırayla görüntülenir.lt_table2, TYPE STANDARD TABLE OF ile tanımlandığı için otomatik olarak sıralanır. Bu nedenle, lt_table2 iç tablosu eklenen değerlerin sırasına göre görüntülenir.
+
 
 ![image](https://github.com/sumeyyaakbulut/ABAP/assets/62395974/38fe7cc5-1e04-42a1-8a08-1140d0936b7f)
 
@@ -43,8 +45,16 @@ Sıralama gerektiren durumlar için ekstra bir işlem yapmanıza gerek yoktur.
 Aynı anahtara sahip yinelenen öğeleri içerebilir.
 WITH NON-UNIQUE DEFAULT KEY ifadesi ile aynı anahtara sahip yinelenen öğeleri destekler.
 
+
 HASHED TABLE:
 Verilere hızlı erişim sağlar, çünkü anahtar değerleri kullanarak verilere doğrudan erişim yapabilirsiniz.
 Anahtar-değer çiftlerini içerir ve her anahtar yalnızca bir kez iç tabloya eklenir.
 Anahtar değerlerinin benzersiz olması gereklidir.
 Sıralama gerektiren durumlar için ekstra bir işlem yapmanız gerekir.
+
+
+```cadence
+DATA it3 TYPE HASHED TABLE OF zdemo_abap_fli WITH UNIQUE DEFAULT KEY.
+
+DATA it4 TYPE SORTED TABLE OF zdemo_abap_fli WITH NON-UNIQUE DEFAULT KEY.
+```
