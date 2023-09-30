@@ -60,4 +60,18 @@ Anahtar-değer çiftlerini içerir ve her anahtar yalnızca bir kez iç tabloya 
 Anahtar değerlerinin benzersiz olması gereklidir.
 Sıralama gerektiren durumlar için ekstra bir işlem yapmanız gerekir.
 
+```cadence
+DATA it5 TYPE TABLE OF zdemo_abap_fli WITH EMPTY KEY.
+```
 
+Yukarıdaki it5 internal tablosu boş anahtarla standart tablodur.
+
+```cadence
+DATA it6 TYPE TABLE OF zdemo_abap_fli.
+SELECT * FROM zdemo_abap_fli INTO TABLE it6
+
+SELECT * FROM zdemo_abap_fli INTO TABLE @DATA(it7).
+
+```
+Yukarıdaki kodda it6 ,zdemo_abap_fli  tipinde tanımlanır.Daha sonra select de  bu oluşturulan it6 internal tablo kullanılmıştır.
+it7 de ise it6 gibi data kullanarak yeni bir satırda tanımlamak yerine direk select te zdemo_abap_fli kullanınan database seviyesindeki tablonun tipinde @data ile yeni bir it7 isminde internal tablo oluşturulmuştur.
