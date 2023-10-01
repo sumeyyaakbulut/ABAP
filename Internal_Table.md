@@ -75,3 +75,15 @@ SELECT * FROM zdemo_abap_fli INTO TABLE @DATA(it7).
 ```
 Yukarıdaki kodda it6 ,zdemo_abap_fli  tipinde tanımlanır.Daha sonra select de  bu oluşturulan it6 internal tablo kullanılmıştır.
 it7 de ise it6 gibi data kullanarak yeni bir satırda tanımlamak yerine direk select te zdemo_abap_fli kullanınan database seviyesindeki tablonun tipinde @data ile yeni bir it7 isminde internal tablo oluşturulmuştur.
+
+
+```cadence
+TABLES: MARA.
+TYPES: BEGIN OF ls_loc,
+        metarial TYPE mara-matnr,
+        spart    TYPE mara-spart,
+        maktl    TYPE mara-maktl,
+      END OF ls_loc.
+
+DATA: it8  TYPE TABLE OF ls_loc.
+```
