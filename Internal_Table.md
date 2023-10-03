@@ -92,9 +92,11 @@ Mara veri tabanından metarial, spart, ve maktl alanların bulunan ls_loc struct
 ```cadence
 DATA: it9 TYPE TABLE OF zdemo_abap_fli OCCURS 0 WITH HEADER LINE.
 ```
-Bu oluşturduğumuz it9 hem structure hem internal tablodur. Şu şekilde örenk üzerinde açıklarsak eğer.
+Bu oluşturduğumuz it9 hem structure hem internal tablodur.OCCURS 0 internal tablonun başlangıçta boş olduğunu göstermektedir. Şu şekilde örenk üzerinde açıklarsak eğer.
 ```cadence
 DATA: it10 TYPE TABLE OF zdemo_abap_fli,
       it11 TYPE zdemo_abap_fl.
 ```
 Bu örnek kodda it10 internal table , it11 ise structure göstermektedir. it9 it11 gibi bir structure, it9[] it10 gibi internal tablodur.
+
+
