@@ -45,4 +45,36 @@ SELECT DISTINCT comp1
 Bu sorgu, "dbtab" adlı tablodan belirli bir koşulu sağlayan satırları seçer ve "comp1" adlı alanın benzersiz (distinct) değerlerini getirir.Yani, her değeri yalnızca bir kez içeren benzersiz (distinct) "comp1" değerlerini içerecektir.
 
 
+# Veri Kaynağı Olarak Internal Tablodan Veri Okuma
+
+FROM @itab1 AS tab ifadesinde itab1 adlı bir içsel tablo (internal table) referans alınmaktadır, yani burada bir veritabanı tablosu değil, program içinde tanımlanan bir içsel tablo kullanılmaktadır. Bu şekilde, veritabanı tablolarının yanı sıra program içinde tanımlanan içsel tablolar da kullanılabilir.
+
+Bu tür kullanımlar, genellikle program içinde geçici olarak tutulan verilerle çalışırken veya veri manipülasyonu yaparken kullanılır. Veritabanı tabloları genellikle FROM ifadesinde doğrudan belirtilirken, program içinde tanımlanan içsel tabloların referansları @ sembolü ile başlatılır.
+
+Örnek
+```cadence
+DATA: lt_source TYPE TABLE OF sflight,
+      lt_filtered TYPE TABLE OF sflight,
+      ls_flight   TYPE sflight.
+
+" lt_source adlı içsel tabloyu doldurma
+APPEND VALUE #( carrid = 'LH' connid = '123' " Diğer alanlar da eklenmeli"
+                fldate = '20230101' seatsocc = 100 )
+              TO lt_source.
+
+APPEND VALUE #( carrid = 'LH' connid = '456' " Diğer alanlar da eklenmeli"
+                fldate = '20230201' seatsocc = 150 )
+              TO lt_source.
+
+" lt_source adlı içsel tabloyu kullanarak veri filtreleme
+SELECT * FROM @lt_source AS tab
+  WHERE carrid = 'LH'
+  INTO TABLE @lt_filtered.
+
+LOOP AT lt_filtered INTO ls_flight.
+  " Filtrelenmiş verilerle bir şeyler yapma
+ENDLOOP.
+
+
+```
 
