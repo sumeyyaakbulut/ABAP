@@ -42,4 +42,7 @@ SELECT DISTINCT comp1
   WHERE ...
   INTO TABLE @itab.
 ```
+Bu sorgu, "dbtab" adlı tablodan belirli bir koşulu sağlayan satırları seçer ve "comp1" adlı alanın benzersiz (distinct) değerlerini getirir.Yani, her değeri yalnızca bir kez içeren benzersiz (distinct) "comp1" değerlerini içerecektir.
+
+
 
