@@ -23,3 +23,23 @@ Artıları,Daha basit ve açık bir sorgu yapısına sahiptir. Belirli alanlar d
 
 
 İki yaklaşımın da sonuçları aynı olacak, ancak performans açısından bazı farklılıklar olabilir. Eğer sorgu basitse veya tüm alanlara ihtiyaç varsa, doğrudan alanları belirtmek daha anlamlı ve açık olabilir. Eğer sorgu karmaşıksa veya sadece belirli alanlara ihtiyaç varsa, FIELDS ifadesi kullanılabilir.
+
+## SELECT DISTINCT
+SELECT sorgusu kullanılırken belirli bir alanın benzersiz değerlerini getirmek için kullanılır. Bu ifade, belirtilen alanın farklı değerlerini içeren satırları döndürür, yani tekrar eden değerleri filtreler.
+
+Bir örnek üzerinden inceleyelim.
+"dbtab" tablosunda "comp1" alanı şu değerlere sahipse:
+comp1
+A
+B
+A
+C
+B
+
+```cadence
+SELECT DISTINCT comp1
+  FROM dbtab
+  WHERE ...
+  INTO TABLE @itab.
+```
+
