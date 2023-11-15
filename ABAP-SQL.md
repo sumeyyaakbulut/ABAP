@@ -78,3 +78,7 @@ ENDLOOP.
 ```
  Yukarıdaki kodda, lt_source adlı bir içsel tablo (internal table) tanımlanmış ve APPEND VALUE # ifadesi, bir internal tabloya yeni bir satır eklemek için kullanılır. Bu ifade, içsel tabloya bir veya daha fazla başlangıç değeri atamak için özel bir ABAP sözdizimidir.VALUE kelimesi, bir başlangıç değeri bloğunu (initial value block) tanımlar. # sembolü, bu bloğun içindeki öğelerin belirtilen sırayla içsel tabloya eklenmesini sağlar.(lt_source Internal tablosu lt_source = VALUE #( carrid = 'LH' connid = '123' " Diğer alanlar da eklenmeli"
                 fldate = '20230101' seatsocc = 100 ) ifadesi ile başlangıç değerleri atanması da kullanılabilir. )
+Bu örnekte, lt_source adlı içsel tablo kullanılarak SELECT sorgusu gerçekleştirilir ve carrid = 'LH' koşuluyla filtreleme yapılır. Filtrelenmiş veriler, lt_filtered adlı başka bir içsel tabloya INTO TABLE ifadesi ile atanır ve daha sonra bu içsel tablo üzerinde işlemler gerçekleştirilebilir.
+
+
+                
