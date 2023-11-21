@@ -19,7 +19,7 @@ READ TABLE ifade dahili bir tablodaki belirli bir girişi aramak için kullanıl
 * COMPARING <fields>: kullanılırken varsayılan olmayan karşılaştırma için alanları belirtir BINARY SEARCH.
 Yukarıdaki ifadeleri kodda inceleyelim.
 
-## WITH KEY ve TRANSPORTING
+### WITH KEY ve TRANSPORTING
 ```cadence
 DATA: lt_data TYPE TABLE OF Zemployee,
       ls_employee TYPE Zemployee,
@@ -50,7 +50,7 @@ ELSE.
   WRITE: / 'Çalışan ID', lv_employee_id, 'internal tabloda bulunamadı.'.
 ENDIF.
 ```
-## INDEX
+### INDEX
 ```cadence
 DATA: lt_data TYPE TABLE OF string,
       lv_index TYPE sy-tabix,
@@ -77,4 +77,4 @@ ELSE.
 ENDIF.
 ```
 
-## REFERENCE INTO
+### REFERENCE INTO
