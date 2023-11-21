@@ -19,7 +19,7 @@ READ TABLE ifade dahili bir tablodaki belirli bir girişi aramak için kullanıl
 * COMPARING <fields>: kullanılırken varsayılan olmayan karşılaştırma için alanları belirtir BINARY SEARCH.
 Yukarıdaki ifadeleri kodda inceleyelim.
 
-#### WITH KEY ve TRANSPORTING
+#### WITH KEY 
 ```cadence
 DATA: lt_data TYPE TABLE OF Zemployee,
       ls_employee TYPE Zemployee,
@@ -50,6 +50,17 @@ ELSE.
   WRITE: / 'Çalışan ID', lv_employee_id, 'internal tabloda bulunamadı.'.
 ENDIF.
 ```
+
+#### TRANSPORTING 
+
+ABAP'da "READ TABLE TRANSPORTING NO FIELDS" ifadesi, bir tablodan veri okurken okunan satırın herhangi bir alanını taşımamak için kullanılır. Bu ifade, okunan satırın tüm alanlarını başka bir değişkene veya alanlara taşımak istemediğiniz durumlarda kullanılır.
+
+"READ TABLE" ifadesi, belirli bir tablodan veri okumak için kullanılır. Örneğin, bir iç tablodan veya veritabanından veri okumak için kullanılabilir. "TRANSPORTING" ise okunan değeri taşımak için kullanılan bir ek parametredir.
+
+"TRANSPORTING" parametresi, okunan satırın hangi alanlarını taşıyacağını belirlemek için kullanılır. Eğer "NO FIELDS" kullanılırsa, okunan satırın hiçbir alanı taşınmaz. Bu durumda, sadece okunan satırın varlığını kontrol etmek veya sadece belirli bir koşulu kontrol etmek istediğinizde kullanışlıdır.
+
+
+
 #### INDEX
 ```cadence
 DATA: lt_data TYPE TABLE OF string,
