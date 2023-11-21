@@ -19,7 +19,7 @@ READ TABLE ifade dahili bir tablodaki belirli bir girişi aramak için kullanıl
 * COMPARING <fields>: kullanılırken varsayılan olmayan karşılaştırma için alanları belirtir BINARY SEARCH.
 Yukarıdaki ifadeleri kodda inceleyelim.
 
-### WITH KEY ve TRANSPORTING
+#### WITH KEY ve TRANSPORTING
 ```cadence
 DATA: lt_data TYPE TABLE OF Zemployee,
       ls_employee TYPE Zemployee,
@@ -50,7 +50,7 @@ ELSE.
   WRITE: / 'Çalışan ID', lv_employee_id, 'internal tabloda bulunamadı.'.
 ENDIF.
 ```
-### INDEX
+#### INDEX
 ```cadence
 DATA: lt_data TYPE TABLE OF string,
       lv_index TYPE sy-tabix,
@@ -77,4 +77,33 @@ ELSE.
 ENDIF.
 ```
 
-### REFERENCE INTO
+#### REFERENCE INTO
+Tablonun belirli bir indeksindeki girişin referansını tutan REFERENCE INTO kullanımı, aslında belirli bir indeksteki elemana referans alarak, bu elemana daha sonra referans üzerinden erişebilme yeteneğini sağlar.
+```cadence
+DATA: lt_data TYPE TABLE OF string,
+      lr_entry TYPE REF TO string,
+      ls_entry  TYPE string.
+
+* İç tabloya bazı değerler ekleyelim.
+APPEND 'Sümeyya' TO lt_data.
+APPEND 'Şifa' TO lt_data.
+APPEND 'Sebiha' TO lt_data.
+
+* Belirli bir indeksi içeren girişi belirleyelim.
+READ TABLE lt_data INDEX 2 REFERENCE INTO lr_entry TRANSPORTING NO FIELDS.
+
+* Sy-subrc kontrolü ile girişin bulunup bulunmadığını kontrol edelim.
+IF sy-subrc = 0 AND lr_entry IS NOT INITIAL.
+  ls_entry = lr_entry->*.
+  WRITE: / 'İndeks bulundu:', sy-tabix.
+  WRITE: / 'Bulunan giriş:', ls_entry.
+ELSE.
+  WRITE: / 'İndeks bulunamadı veya lr_entry boş.', sy-tabix.
+ENDIF.
+```
+Bu kodda,lt_data adındaki iç tablo üzerinde bir READ TABLE işlemi yapılır.
+INDEX 2 ifadesi ile ikinci satırdaki eleman seçilir.
+REFERENCE INTO lr_entry ifadesi ile bu elemanın referansı lr_entry değişkenine atanır.
+TRANSPORTING NO FIELDS ifadesi ile herhangi bir alan taşınmaz (değiştirilmez).
+Bu işlemin ardından, lr_entry değişkeni, lt_data iç tablosunun ikinci satırının referansını içerir. Yani, lr_entry üzerinden lt_data iç tablosundaki ikinci satırdaki değerlere erişebilirsiniz.
+Bu kod bloğu içinde, ls_entry değişkeni, lr_entry referansının işaret ettiği değeri okur ve ekrana yazdırır. Eğer belirtilen indeks numarası geçerliyse (sy-subrc = 0) ve lr_entry boş değilse, ls_entry değişkenine atama yapılarak içeriğini okuyup ekrana yazdırılır. Aksi takdirde, belirtilen indeks bulunamamış veya lr_entry boşsa uygun bir hata mesajı yazdırılır.
