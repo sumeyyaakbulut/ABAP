@@ -12,6 +12,10 @@ Field symbol'ların temel amaçları şunlardır:
 
 
 ### Internal  Tablo İçeriği Değişimi
+
+Bu tekniği kullandığınızda sistem, verileri dahili tablodan çalışma alanına kopyalar. Daha sonra, ifadeyi kullanarak bunları dahili tabloya geri kopyalamadan önce çalışma alanının içeriğini değiştirirsiniz MODIFY.
+Bu tekniği büyük bir dahili tabloyu işlemek için kullanırsanız, verilerin ileri geri kopyalanmasının maliyeti nedeniyle performans sorunlarına neden olma riskiyle karşı karşıya kalırsınız.
+
 ```cadence
 DATA lt_carrier TYPE STANDARD TABLE OF st_carrier
                      WITH NON-UNIQUE KEY carrier_id.
@@ -24,7 +28,7 @@ ENDLOOP.
 ```
 ![image](https://github.com/sumeyyaakbulut/ABAP/assets/62395974/09cba751-de31-4002-a05a-ed0a4ea22ddc)
 
-
+### Internal Tablo İçeriği Field Symbol Değişimi
 ```cadence
 DATA lt_carrier TYPE STANDARD TABLE OF st_carrier
                      WITH NON-UNIQUE KEY carrier_id.
