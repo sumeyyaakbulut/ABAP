@@ -12,5 +12,8 @@ Field symbol'ların temel amaçları şunlardır:
 
 
 ### Internal  Tablo İçeriği Değişimi
-""cadance
-""
+```cadence
+DATA lt_carrier TYPE STANDARD TABLE OF st_carrier
+                     WITH NON-UNIQUE KEY 
+```
+https://learning.sap.com/learning-journey/acquire-core-abap-skills/using-field-symbols-to-process-internal-tables_f1855f41-00d3-4f8d-9a2c-663a321c6637
