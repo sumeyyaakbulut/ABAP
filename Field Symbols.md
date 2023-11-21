@@ -29,6 +29,7 @@ ENDLOOP.
 ![image](https://github.com/sumeyyaakbulut/ABAP/assets/62395974/09cba751-de31-4002-a05a-ed0a4ea22ddc)
 
 ### Internal Tablo İçeriği Field Symbol Değişimi
+Alan sembolü bir işaretçidir. İşaretçi, farklı bir nesnenin bellek adresini bilen ve o nesneyi değiştirmenize olanak tanıyan bir veri nesnesidir. Dahili tablolar söz konusu olduğunda işaretçi, dahili tablonun bir satırını önce onu bir çalışma alanına kopyalamadan adreslemenize olanak tanır. Bir çalışma alanıyla değil, doğrudan tablo satırıyla çalıştığınız için değişikliklerinizi tekrar dahili tabloya kopyalamanız gerekmez.
 ```cadence
 DATA lt_carrier TYPE STANDARD TABLE OF st_carrier
                      WITH NON-UNIQUE KEY carrier_id.
