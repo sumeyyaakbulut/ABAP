@@ -42,9 +42,9 @@ READ TABLE lt_data WITH KEY EmployeeID = lv_employee_id TRANSPORTING NO FIELDS.
 "Girişin bulunup bulunmadığını kontrol edin.
 IF sy-subrc = 0.
   lv_index = sy-tabix.
-  WRITE: / 'Employee ID', lv_employee_id, 'found at index', lv_index.
+  WRITE: / 'Çalışan ID', lv_employee_id, 'indekste bulundu', lv_index.
   MOVE-CORRESPONDING lt_data[ lv_index ] TO ls_employee.
-  " Now ls_employee contains the data of the found entry.
+  " Artık ls_employee bulunan girişin verilerini içeriyor.
   WRITE: / 'Çalışan bilgileri:', ls_employee-FirstName, ls_employee-LastName.
 ELSE.
   WRITE: / 'Çalışan ID', lv_employee_id, 'internal tabloda bulunamadı.'.
@@ -59,7 +59,39 @@ ABAP'da "READ TABLE TRANSPORTING NO FIELDS" ifadesi, bir tablodan veri okurken o
 
 "TRANSPORTING" parametresi, okunan satırın hangi alanlarını taşıyacağını belirlemek için kullanılır. Eğer "NO FIELDS" kullanılırsa, okunan satırın hiçbir alanı taşınmaz. Bu durumda, sadece okunan satırın varlığını kontrol etmek veya sadece belirli bir koşulu kontrol etmek istediğinizde kullanışlıdır.
 
+```cadence
+READ TABLE lt_data TRANSPORTING NO  FIELDS WITH KEY kposn = ls_data-posnr.
+IF sy-subrc EQ 0.
+....
+```
 
+```cadence
+DATA: lt_data TYPE TABLE OF Zemployee,
+      ls_employee TYPE Zemployee,
+      lv_employee_id TYPE i.
+
+" Internal tablosunu bazı verilerle doldurun
+APPEND VALUE #( EmployeeID = 1 FirstName = 'Sümeyya' LastName = 'Akbulut' ) TO lt_data.
+APPEND VALUE #( EmployeeID = 2 FirstName = 'Şifa' LastName = 'Keleş' ) TO lt_data.
+APPEND VALUE #( EmployeeID = 3 FirstName = 'Sebiha' LastName = 'Dilek' ) TO lt_data.
+
+" Arama için anahtar alanları belirtilmiştir.
+lv_employee_id = 2.
+
+" Belirli alanları kopyalamak için TRANSPORTING ile READ TABLE'ı kullanın.
+READ TABLE lt_data WITH KEY EmployeeID = lv_employee_id TRANSPORTING FirstName LastName.
+
+* Girişin bulunup bulunmadığını kontrol edilir.
+IF sy-subrc = 0.
+  WRITE: / 'Çalışan ID', lv_employee_id, 'indekste bulundu', sy-tabix.
+  WRITE: / 'Çalışan Detay:',
+         'First Name:', ls_employee-FirstName,
+         'Last Name:', ls_employee-LastName.
+ELSE.
+  WRITE: / 'Çalışan ID', lv_employee_id, 'dahili tabloda bulunamadı.'.
+ENDIF.
+....
+```
 
 #### INDEX
 ```cadence
