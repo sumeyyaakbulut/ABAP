@@ -14,6 +14,23 @@ Field symbol'ların temel amaçları şunlardır:
 ### Internal  Tablo İçeriği Değişimi
 ```cadence
 DATA lt_carrier TYPE STANDARD TABLE OF st_carrier
-                     WITH NON-UNIQUE KEY 
+                     WITH NON-UNIQUE KEY carrier_id.
+DATA ls_carrier LIKE LINE OF lt_carrier.
+  LOOP AT lt_carrier INTO ls_carrier
+                     WHERE currency_code IS INITIAL.
+    ls_carrier-currency_code = 'USD'.
+    MODIFY lt_carrier FROM ls_carrier
+ENDLOOP.
 ```
-https://learning.sap.com/learning-journey/acquire-core-abap-skills/using-field-symbols-to-process-internal-tables_f1855f41-00d3-4f8d-9a2c-663a321c6637
+
+
+```cadence
+DATA lt_carrier TYPE STANDARD TABLE OF st_carrier
+                     WITH NON-UNIQUE KEY carrier_id.
+FIELD-SYMBOLS <fs_carrier> LIKE LINE OF lt_carrier.
+  LOOP AT lt_carrier ASSIGNING <fs_carrier>
+                     WHERE currency_code IS INITIAL.
+    <fs_carrier>-currency_code = 'USD'.
+    
+ENDLOOP.
+```
