@@ -84,15 +84,15 @@ DATA: lt_data TYPE TABLE OF string,
       lr_entry TYPE REF TO string,
       ls_entry  TYPE string.
 
-* İç tabloya bazı değerler ekleyelim.
+" İç tabloya bazı değerler ekleyelim.
 APPEND 'Sümeyya' TO lt_data.
 APPEND 'Şifa' TO lt_data.
 APPEND 'Sebiha' TO lt_data.
 
-* Belirli bir indeksi içeren girişi belirleyelim.
+" Belirli bir indeksi içeren girişi belirleyelim.
 READ TABLE lt_data INDEX 2 REFERENCE INTO lr_entry TRANSPORTING NO FIELDS.
 
-* Sy-subrc kontrolü ile girişin bulunup bulunmadığını kontrol edelim.
+" Sy-subrc kontrolü ile girişin bulunup bulunmadığını kontrol edelim.
 IF sy-subrc = 0 AND lr_entry IS NOT INITIAL.
   ls_entry = lr_entry->*.
   WRITE: / 'İndeks bulundu:', sy-tabix.
@@ -107,3 +107,37 @@ REFERENCE INTO lr_entry ifadesi ile bu elemanın referansı lr_entry değişkeni
 TRANSPORTING NO FIELDS ifadesi ile herhangi bir alan taşınmaz (değiştirilmez).
 Bu işlemin ardından, lr_entry değişkeni, lt_data iç tablosunun ikinci satırının referansını içerir. Yani, lr_entry üzerinden lt_data iç tablosundaki ikinci satırdaki değerlere erişebilirsiniz.
 Bu kod bloğu içinde, ls_entry değişkeni, lr_entry referansının işaret ettiği değeri okur ve ekrana yazdırır. Eğer belirtilen indeks numarası geçerliyse (sy-subrc = 0) ve lr_entry boş değilse, ls_entry değişkenine atama yapılarak içeriğini okuyup ekrana yazdırılır. Aksi takdirde, belirtilen indeks bulunamamış veya lr_entry boşsa uygun bir hata mesajı yazdırılır.
+
+
+####  BINARY SEARCH
+Read table da doğrusal okumayla binary(ikili arama) hangi durumlarda kullanımın avantajlı olduğuna bakalım.
+* Bunun nedeni, belirtildiği gibi ikili aramanın, eşleşen bir kayıt bulana kadar arama aralığını her 'arama' için ikiye bölmesi, oysa doğrusal aramanın bir eşleşme bulana kadar sırayla ilerlemesidir.
+*Doğrusal bir arama için ortalama arama süresi, N/2 olacaktır; burada N, tablodaki girişlerin sayısıdır. Bir ikili arama, arama aralığını tekrar tekrar yarıya indirir. Bu nedenle arama süresi en fazla Log2(N)'dir.
+*İkili aramam için önceden o internal tablonun sıralanmış olması gerekmektedir.(SORT, abap programlarında dahili tabloları sıralamak için kullanılır. order by, veri formu veritabanı tablolarını almak için seçme sorgusunda kullanılır yükselerek veya azalarak)
+*Örnek: 128 girişli dahili bir tabloda, ortalama doğrusal aramanın 64 girişi kontrol etmesi ve en kötü durumda 128 girişin tamamının kontrol edilmesi gerekir. İkili arama, 128 girişli bir tablo için asla 8'den fazla girişi kontrol etmek zorunda kalmayacak.
+
+```cadence
+DATA: lt_data TYPE TABLE OF string,
+      lv_search TYPE string.
+
+" Internal tablonun sıralanması.
+SORT lt_data.
+
+" Internal tabloyu bazı verilerle doldurulması.
+APPEND 'Sümeyya' TO lt_data.
+APPEND 'Şifa' TO lt_data.
+APPEND 'Sebiha' TO lt_data.
+
+" Aranacak değeri belirtilmesi.
+lv_search = 'Sebiha'.
+
+" Sıralanan internal tabloda binary search yapın.
+READ TABLE lt_data WITH KEY lv_search BINARY SEARCH TRANSPORTING NO FIELDS.
+
+" Girişin bulunup bulunmadığını kontrol edin.
+IF sy-subrc = 0.
+  WRITE: / 'Bulundu:', lv_search, 'at index', sy-tabix.
+ELSE.
+  WRITE: / 'Bulunamadı:', lv_search.
+ENDIF.
+```
