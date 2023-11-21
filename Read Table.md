@@ -24,20 +24,20 @@ DATA: lt_data TYPE TABLE OF Zemployee,
       lv_employee_id TYPE i,
       lv_index TYPE sy-tabix.
 
-* Zemployee'nin Çalışan Kimliği, Adı, Soyadı vb. alanları içeren bir structure olduğunu varsayalım..
+"Zemployee'nin Çalışan Kimliği, Adı, Soyadı vb. alanları içeren bir structure olduğunu varsayalım..
 
-* Internal tablosunu bazı verilerle doldurun
+"Internal tablosunu bazı verilerle doldurun
 APPEND VALUE #( EmployeeID = 1 FirstName = 'Sümeyya' LastName = 'Akbulut' ) TO lt_data.
 APPEND VALUE #( EmployeeID = 2 FirstName = 'Şifa' LastName = 'Keleş' ) TO lt_data.
 APPEND VALUE #( EmployeeID = 3 FirstName = 'Sebiha' LastName = 'Dilek' ) TO lt_data.
 
-* Arama için anahtar alanları belirtilmiştir.
+"Arama için anahtar alanları belirtilmiştir.
 lv_employee_id = 2.
 
-*Girişi aramak için READ TABLE'ı with KEY ile kullanılmıştır
+"Girişi aramak için READ TABLE'ı with KEY ile kullanılmıştır
 READ TABLE lt_data WITH KEY EmployeeID = lv_employee_id TRANSPORTING NO FIELDS.
 
-* Girişin bulunup bulunmadığını kontrol edin.
+"Girişin bulunup bulunmadığını kontrol edin.
 IF sy-subrc = 0.
   lv_index = sy-tabix.
   WRITE: / 'Employee ID', lv_employee_id, 'found at index', lv_index.
