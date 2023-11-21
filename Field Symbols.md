@@ -22,6 +22,7 @@ DATA ls_carrier LIKE LINE OF lt_carrier.
     MODIFY lt_carrier FROM ls_carrier
 ENDLOOP.
 ```
+![image](https://github.com/sumeyyaakbulut/ABAP/assets/62395974/09cba751-de31-4002-a05a-ed0a4ea22ddc)
 
 
 ```cadence
@@ -34,3 +35,4 @@ FIELD-SYMBOLS <fs_carrier> LIKE LINE OF lt_carrier.
     
 ENDLOOP.
 ```
+![image](https://github.com/sumeyyaakbulut/ABAP/assets/62395974/7a0c9be6-cd83-4482-a39a-bfddefd42008)
