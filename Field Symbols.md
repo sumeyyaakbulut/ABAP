@@ -9,3 +9,8 @@ Field symbol'ların temel amaçları şunlardır:
 2. **Genel (Generic) Programlama:** Field symbol'lar, genellikle iç tablolardaki veya diğer dinamik veri yapılarındaki verilere dinamik olarak erişim sağlamak için kullanılır. Bu, daha genel ve yeniden kullanılabilir kod yazmanıza olanak tanır.
 
 3. **Sıklıkla Kullanılan Senaryolar:** Field symbol'lar genellikle ABAP programlarında iç tablolarda döngü yapma, tablo satırlarını dinamik olarak değiştirme, filtreleme ve diğer dinamik veri işleme senaryolarında kullanılır.
+
+
+### Internal  Tablo İçeriği Değişimi
+""cadance
+""
