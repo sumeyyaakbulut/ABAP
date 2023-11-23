@@ -1,3 +1,4 @@
+## Structure
 TYPES: BEGIN OF kullanımı genellikle farklı tablolardan veya veri yapılarından alanları bir arada kullanmak için kullanılır. Bu yapının temel amacı, belirli bir veri yapısını veya tabloyu temsil eden bir tür (TYPE) oluşturmaktır. Bu tür, içinde farklı alanları (alanlar veya bileşenler) barındırabilir.
 
 ```cadence
